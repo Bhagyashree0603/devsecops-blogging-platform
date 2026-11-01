@@ -1,0 +1,29 @@
+replicaCount: 2
+image:
+  repository: nginx
+  tag: latest
+  pullPolicy: IfNotPresent
+service:
+  type: ClusterIP
+  port: 4000
+containerPort: 4000
+resources:
+  requests: { cpu: 100m, memory: 128Mi }
+  limits: { cpu: 500m, memory: 512Mi }
+postgresql:
+  enabled: true
+  auth:
+    username: bloguser
+    database: blogdb
+    password: change-this-demo-password
+  primary:
+    persistence:
+      enabled: true
+      size: 8Gi
+
+frontend:
+  image:
+    repository: nginx
+    tag: latest
+  replicas: 2
+  servicePort: 80

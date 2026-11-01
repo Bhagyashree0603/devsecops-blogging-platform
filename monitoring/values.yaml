@@ -1,0 +1,9 @@
+grafana:
+  adminUser: admin
+  persistence:
+    enabled: false
+prometheus:
+  prometheusSpec:
+    retention: 7d
+alertmanager:
+  enabled: true

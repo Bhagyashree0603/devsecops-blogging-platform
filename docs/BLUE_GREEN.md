@@ -1,0 +1,2 @@
+# Blue-Green deployment exercise
+The Helm starter initially deploys the blue-labelled API. For a true blue/green exercise, create a second Deployment from the same template with `color: green`, a distinct image tag, and at least one replica. Wait for readiness and run smoke tests against the green pods. Then run `./kubernetes/blue-green-switch.ps1 -Color green` to switch the Service selector. Keep blue running until validation completes; rollback by switching to blue. Do not claim zero downtime until you demonstrate successful readiness and traffic tests.

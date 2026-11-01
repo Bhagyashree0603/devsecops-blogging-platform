@@ -1,0 +1,8 @@
+aws_region = "ap-south-1"
+project_name = "blogging-devsecops"
+cluster_name = "blogging-eks"
+kubernetes_version = "1.31"
+instance_types = ["t3.medium"]
+desired_size = 2
+min_size = 1
+max_size = 3

@@ -1,0 +1,4 @@
+# Trivy configuration. CI uses --exit-code 1 --severity CRITICAL --ignore-unfixed.
+severity:
+  - CRITICAL
+ignore-unfixed: true
