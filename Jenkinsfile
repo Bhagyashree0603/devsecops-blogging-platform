@@ -49,8 +49,11 @@ pipeline {
 
         stage('SonarQube') {
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh 'sonar-scanner -Dsonar.projectKey=blogging-platform -Dsonar.sources=backend/src,frontend/src'
+                script {
+                    def scannerHome = tool 'SonarScanner'
+                    withSonarQubeEnv('sonarqube') {
+                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=blogging-platform -Dsonar.sources=backend/src,frontend/src"
+                    }
                 }
             }
         }
