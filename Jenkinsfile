@@ -1,10 +1,11 @@
+
 pipeline {
     agent any
-
 
     tools {
         nodejs 'NodeJS-24'
     }
+
     options {
         timestamps()
         disableConcurrentBuilds()
@@ -51,8 +52,16 @@ pipeline {
             steps {
                 script {
                     def scannerHome = tool 'SonarScanner'
+
                     withSonarQubeEnv('sonarqube') {
-                        sh "${scannerHome}/bin/sonar-scanner -Dsonar.projectKey=blogging-platform -Dsonar.sources=backend/src,frontend/src"
+                        withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                            sh """
+                                ${scannerHome}/bin/sonar-scanner \
+                                -Dsonar.projectKey=blogging-platform \
+                                -Dsonar.sources=backend/src,frontend/src \
+                                -Dsonar.token=\${SONAR_TOKEN}
+                            """
+                        }
                     }
                 }
             }
